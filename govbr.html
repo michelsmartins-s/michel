@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gov.br - Projeto escolar</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#1351b4;--azul-esc:#0c326f;--verde:#168821;--cinza:#636363;--borda:#e0e0e0;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Raleway","Rawline",Arial,sans-serif;background:#dfe3ea;display:flex;justify-content:center;color:#222}
+.app{position:relative;width:100%;max-width:430px;height:100vh;height:100dvh;background:#f8f8f8;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 30px rgba(0,0,0,.2)}
+header{background:#fff;height:68px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+.logo{font-size:34px;font-weight:700;letter-spacing:-2px;line-height:1}
+.logo span:nth-child(1){color:#1351b4}.logo span:nth-child(2){color:#f2b705}.logo span:nth-child(3){color:#168821}.logo span:nth-child(4){color:#1351b4}
+.hright{display:flex;align-items:center;gap:20px}
+.bell{position:relative;width:26px;height:26px;fill:#888}
+.bell-n{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:var(--verde);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.avatar{width:40px;height:40px;border-radius:50%;background:#bbb center/cover;border:1px solid #222;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.avatar svg{width:100%;height:100%}
+main{flex:1;overflow-y:auto;position:relative}
+.screen{display:none;min-height:100%}
+.screen.on{display:block}
+/* início */
+.hero{background:linear-gradient(100deg,#0a2a7a 30%,#1d6df0);color:#fff;padding:20px 18px 16px;min-height:130px;position:relative}
+.hero h2{font-size:17px;font-weight:500}
+.hero p{font-size:15px;letter-spacing:1.5px;margin:12px 0 10px;font-weight:500}
+.bars{display:flex;gap:4px;width:75%}
+.bars i{height:5px;flex:1;background:#c4c4c4;transform:skewX(-20deg)}
+.bars i:last-child{background:repeating-linear-gradient(90deg,#c4c4c4 0 1px,transparent 1px 3px)}
+.nivel{margin:10px 0 0 auto;display:flex;align-items:center;gap:8px;width:max-content;background:#fff;color:var(--azul-esc);border:none;border-radius:20px;padding:7px 14px;font:600 11px "Raleway",sans-serif;letter-spacing:1.5px;cursor:pointer}
+.busca{margin:26px 14px 20px;background:#fff;border:1px solid #aaa;border-radius:8px;display:flex;align-items:center;padding:0 14px;height:52px;box-shadow:0 2px 3px rgba(0,0,0,.15)}
+.busca input{flex:1;border:none;outline:none;font:italic 16px "Raleway",sans-serif;color:#333;background:none}
+.card{background:#fff;margin:0 14px 18px;padding:18px 0 6px;box-shadow:0 2px 5px rgba(0,0,0,.15)}
+.card h3{font-size:19px;font-weight:600;color:#777;padding:0 20px 14px}
+.item{display:flex;align-items:center;gap:14px;margin:0 16px;padding:18px 4px;border-top:1px solid var(--borda);color:var(--azul-esc);font-weight:600;font-size:17px;cursor:pointer}
+.item svg.ic{width:22px;height:22px;fill:var(--azul-esc);flex:none}
+.item .t{flex:1}
+.novo{background:var(--verde);color:#fff;font-size:12px;font-weight:600;padding:5px 9px;border-radius:14px}
+.chev{width:20px;height:20px;fill:none;stroke:var(--azul);stroke-width:2.5}
+/* barra de título */
+.titulo{background:var(--azul-esc);color:#fff;height:52px;display:flex;align-items:center;padding:0 14px;position:sticky;top:0;z-index:2}
+.titulo button{background:none;border:none;color:#fff;width:34px;cursor:pointer}
+.titulo span{flex:1;text-align:center;font-size:17px;margin-right:34px}
+/* dados */
+.capa{background:var(--azul-esc);height:215px;display:flex;align-items:center;justify-content:center}
+.foto{width:132px;height:132px;border-radius:50%;border:7px solid #3f87a6;background:#fff center/cover no-repeat;overflow:hidden}
+.foto svg{width:100%;height:100%}
+.dado{display:flex;gap:18px;padding:16px 20px;align-items:center}
+.dado svg{width:28px;height:28px;fill:none;stroke:var(--azul);stroke-width:2;flex:none}
+.dado small{display:block;color:var(--azul);font-size:14px;margin-bottom:2px}
+.dado div{font-size:18px;word-break:break-word}
+.btn{display:block;width:calc(100% - 56px);margin:6px 28px 90px;background:var(--azul);color:#fff;border:none;border-radius:30px;height:48px;font:500 17px "Raleway",sans-serif;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+.fab{position:absolute;right:16px;bottom:96px;width:70px;height:70px;border-radius:12px;background:#228540;border:none;box-shadow:0 3px 8px rgba(0,0,0,.3);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:3}
+.fab.on{display:flex}
+.fab svg{width:28px;height:28px;fill:#fff}
+/* carteira */
+.vazio{display:flex;flex-direction:column;height:calc(100% - 52px);min-height:420px;background:#fff}
+.vazio p{flex:1;display:flex;align-items:center;padding:0 40px;font-size:20px;line-height:1.5}
+.vazio .btn{margin:0 16px 22px;width:calc(100% - 32px)}
+/* qr */
+.qr{background:#fff;text-align:center;padding:40px 24px}
+.qr canvas{border:1px solid var(--borda);padding:10px;margin:20px 0}
+/* nav */
+nav{flex:none;height:76px;background:#fff;display:flex;align-items:flex-start;justify-content:space-around;padding-top:10px;border-top:1px solid #eee;position:relative;z-index:4}
+nav button{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;font:400 15px "Raleway",sans-serif;color:#888;cursor:pointer;width:20%}
+nav button svg{width:30px;height:30px;fill:#888}
+nav button.on{color:var(--azul)}nav button.on svg{fill:var(--azul)}
+nav .qrb{margin-top:-4px}
+nav .qrb .c{width:86px;height:86px;border-radius:50%;background:var(--verde);display:flex;align-items:center;justify-content:center;margin-top:-6px}
+nav .qrb .c svg{fill:#fff;width:40px;height:40px}
+nav .qrb{font-size:15px;gap:2px}
+/* menu */
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.25s;z-index:10}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:absolute;top:0;bottom:0;left:0;width:78%;background:#fff;border-radius:0 24px 24px 0;transform:translateX(-102%);transition:.28s;z-index:11;padding-top:30px}
+.drawer.on{transform:none}
+.drawer h4{font-size:30px;font-weight:600;padding:20px 26px 6px;color:#333}
+.drawer .v{padding:8px 26px 22px;color:#555;font-size:18px;border-bottom:1px solid #aaa}
+.mi{display:flex;gap:16px;align-items:center;padding:16px 26px;color:var(--azul);font-size:19px;line-height:1.35;cursor:pointer}
+.mi svg{width:28px;height:28px;fill:var(--azul);flex:none}
+.mi:first-of-type{margin-top:46px}
+.sw{margin-left:auto;width:56px;height:34px;border-radius:17px;background:#aaa;position:relative;transition:.2s;flex:none}
+.sw::after{content:"";position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;background:#fff;transition:.2s}
+.sw.on{background:var(--azul)}.sw.on::after{left:26px}
+.toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:20;white-space:nowrap}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header>
+    <div class="logo"><span>g</span><span>o</span><span>v</span><span>.br</span></div>
+    <div class="hright">
+      <div class="bell-w" id="bellW" style="position:relative;cursor:pointer">
+        <svg class="bell" viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5-6.7V3a2 2 0 0 0-4 0v1.3A7 7 0 0 0 5 11v5l-2 2v1h18v-1z"/></svg>
+        <span class="bell-n">1</span>
+      </div>
+      <div class="avatar" id="hAvatar"></div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- INÍCIO -->
+    <section class="screen on" id="s-inicio">
+      <div class="hero">
+        <h2>Olá, <b id="primeiroNome"></b></h2>
+        <p>SUA CONTA É NÍVEL <b>PRATA</b></p>
+        <div class="bars"><i></i><i></i><i></i></div>
+        <button class="nivel" data-toast="Função institucional não disponível"><svg width="20" height="14" viewBox="0 0 24 16" fill="none" stroke="#0c326f" stroke-width="2.5"><path d="M1 14l7-7 5 5 10-10M17 2h6v6"/></svg>AUMENTAR NÍVEL</button>
+      </div>
+      <div class="busca"><input placeholder="Encontre serviços públicos no gov.br"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0c326f" stroke-width="2.5"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg></div>
+      <div class="card">
+        <h3>Serviços</h3>
+        <div class="item" data-toast="Função institucional não disponível"><svg class="ic" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm0 2.2l7 3.1V11c0 4.5-3 8.7-7 9.9-4-1.200-7-5.400-7-9.900V6.300zm-1 11.300l-3.500-3.500 1.400-1.400 2.100 2.100 4.600-4.600 1.400 1.400z"/></svg><span class="t">Gerar código de acesso</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></div>
+        <div class="item" data-toast="Função institucional não disponível"><svg class="ic" viewBox="0 0 24 24"><circle cx="5" cy="5" r="2.500"/><circle cx="19" cy="5" r="2.500"/><path d="M1 12c0-2 1.500-3.500 3.500-3.500H6V16H4v5H2v-6H1zM23 12c0-2-1.500-3.500-3.500-3.500H18V16h2v5h2v-6h1zM8 11l3-2v2h2V9l3 2-3 2v-2h-2v2z"/></svg><span class="t">Procuração eletrônica</span><span class="novo">NOVO</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></div>
+        <div class="item" data-toast="Função institucional não disponível"><svg class="ic" viewBox="0 0 24 24"><path d="M2 4h20v3l-10 6L2 7zm0 5.500l10 6 10-6V20H2z"/></svg><span class="t">Caixa Postal</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></div>
+        <div class="item" data-go="carteira"><svg class="ic" viewBox="0 0 24 24"><path d="M3 5h16a2 2 0 0 1 2 2v1H11a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h10v1a2 2 0 0 1-2 2H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 6h10v4H12z"/></svg><span class="t">Carteira de documentos</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></div>
+        <div class="item" data-toast="Função institucional não disponível"><svg class="ic" viewBox="0 0 24 24"><path d="M6 2h8l5 5v6l-3 .5V9h-5V4H6v16h5l-1 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm14 12l2 2-7 7-3 1 1-3z"/></svg><span class="t">Assinar documentos digitalmente</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></div>
+      </div>
+    </section>
+
+    <!-- DADOS -->
+    <section class="screen" id="s-dados" style="background:#f8f8f8">
+      <div class="titulo"><button data-go="inicio"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.500"><path d="M15 4l-8 8 8 8"/></svg></button><span>Dados pessoais</span></div>
+      <div class="capa"><div class="foto" id="foto"></div></div>
+      <div class="card" style="margin-top:20px;padding-top:20px">
+        <h3 style="padding-bottom:6px">Dados básicos</h3>
+        <div class="dado"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-5 3.500-8 8-8s8 3 8 8z"/></svg><div><small>Nome</small><span id="d-nome"></span></div></div>
+        <div class="dado"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 2v5M16 2v5"/></svg><div><small>Nascimento</small><span id="d-nasc"></span></div></div>
+        <div class="dado"><svg viewBox="0 0 24 24" fill="#1351b4"><path d="M2 5l6-2v16l-6 2zm8-2l6 2v8a6 6 0 0 0-3 9l-3-1zm9 7a4 4 0 0 1 4 4c0 3-4 7-4 7s-4-4-4-7a4 4 0 0 1 4-4z" stroke="none"/></svg><div><small>Naturalidade</small><span id="d-nat"></span></div></div>
+        <div class="dado"><svg viewBox="0 0 24 24" fill="#1351b4"><circle cx="12" cy="4" r="2.500" stroke="none"/><path d="M8 9h8l1 7h-2l-.5 6h-1.500v-5h-2v5H9.500L9 16H7z" stroke="none"/></svg><div><small>Nome da Mãe</small><span id="d-mae"></span></div></div>
+        <div class="dado"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M5 16c0-2 6-2 6 0M14 10h5M14 14h5"/></svg><div><small>CPF</small><span id="d-cpf"></span></div></div>
+      </div>
+      <div class="card" style="padding-top:20px">
+        <h3 style="padding-bottom:6px">Dados de contato</h3>
+        <div class="dado"><svg viewBox="0 0 24 24" fill="#1351b4"><path d="M6.600 10.800a15 15 0 0 0 6.600 6.600l2.200-2.200a1 1 0 0 1 1-.25c1.100.37 2.300.57 3.600.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.300.2 2.500.57 3.600a1 1 0 0 1-.25 1z" stroke="none"/></svg><div><small>Telefone</small><span id="d-tel"></span></div></div>
+        <div class="dado"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 7l10 7 10-7"/></svg><div><small>E-mail</small><span id="d-mail"></span></div></div>
+        <div class="dado"><svg viewBox="0 0 24 24" fill="#1351b4"><path d="M12 2a6 6 0 0 0-2 11.600V22h4v-8.400A6 6 0 0 0 12 2zm0 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" stroke="none"/></svg><div><small>Endereço</small><span id="d-end"></span></div></div>
+      </div>
+      <button class="btn" data-toast="Edição desativada nesta versão">Editar</button>
+    </section>
+
+    <!-- QR -->
+    <section class="screen" id="s-qr">
+      <div class="titulo"><button data-go="inicio"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.500"><path d="M15 4l-8 8 8 8"/></svg></button><span>QR Code</span></div>
+      <div class="qr"><p style="font-size:18px">Leitor de QR Code (demonstração)</p><canvas id="qrc" width="220" height="220"></canvas><p style="color:#666">Esta tela é apenas ilustrativa.</p></div>
+    </section>
+
+    <!-- CARTEIRA -->
+    <section class="screen" id="s-carteira" style="background:#fff">
+      <div class="titulo"><button data-go="inicio"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.500"><path d="M15 4l-8 8 8 8"/></svg></button><span>Carteira de documentos</span></div>
+      <div class="vazio"><p>Você ainda não possui nenhum documento na sua carteira.</p><button class="btn" data-toast="Função institucional não disponível">Adicionar documento</button></div>
+    </section>
+  </main>
+
+  <button class="fab" id="fab" data-toast="Compartilhar dados (demonstração)"><svg viewBox="0 0 24 24"><path d="M18 16a3 3 0 0 0-2 .8l-7-4.100a3 3 0 0 0 0-1.400l7-4.100A3 3 0 1 0 15 5a3 3 0 0 0 .1.700l-7 4.100a3 3 0 1 0 0 4.400l7.100 4.100A3 3 0 1 0 18 16z"/></svg></button>
+
+  <nav>
+    <button data-tab="inicio" class="on"><svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h5v-6h4v6h5v-8h3z"/></svg>Início</button>
+    <button data-tab="dados"><svg viewBox="0 0 24 24"><path d="M9 2h6v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3zm1 2v2h4V4zm-2 7h2v2H8zm4 0h4v2h-4zm-4 4h2v2H8zm4 0h4v2h-4z"/></svg>Dados</button>
+    <button data-tab="qr" class="qrb"><div class="c"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm2 2v4h4V5zm-2 8h8v8H3zm2 2v4h4v-4zM13 3h8v8h-8zm2 2v4h4V5zm-2 8h2v2h-2zm4 0h4v2h-4zm-4 4h2v4h-2zm4 2h2v2h-2z"/></svg></div>QR Code</button>
+    <button data-tab="carteira"><svg viewBox="0 0 24 24"><path d="M3 5h16a2 2 0 0 1 2 2v1H11a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h10v1a2 2 0 0 1-2 2H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 6h10v4H12z"/></svg>Carteira</button>
+    <button id="btnMenu"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>Menu</button>
+  </nav>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer">
+    <h4>gov.br</h4>
+    <div class="v">Versão 3.8.9 (build 2)</div>
+    <div class="mi" id="bio"><svg viewBox="0 0 24 24"><path d="M12 2a8 8 0 0 0-8 8v2h2v-2a6 6 0 0 1 12 0v6h2v-6a8 8 0 0 0-8-8zm0 4a4 4 0 0 0-4 4v5a6 6 0 0 1-1 3l1.700 1A8 8 0 0 0 10 15v-5a2 2 0 0 1 4 0v8h2v-8a4 4 0 0 0-4-4z"/></svg><span>Ativar login com biometria do celular</span><div class="sw on" id="sw"></div></div>
+    <div class="mi" data-toast="Telas de entrada reiniciadas"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg><span>Rever telas de entrada do aplicativo</span></div>
+    <div class="mi" data-toast="Termo de uso (demonstração)"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.500 3.800 10.700 9 12 5.200-1.300 9-6.500 9-12V5zm0 2.200l7 3.100V11H12zM12 12h7c-.6 4.200-3.400 7.800-7 9z"/></svg><span>Termo de Uso e Aviso de Privacidade</span></div>
+    <div class="mi" data-toast="Sessão encerrada (demonstração)"><svg viewBox="0 0 24 24"><path d="M7 2h8a2 2 0 0 1 2 2v7h-2V5H7v13h4v2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm10 11a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm-1.700 2.300L14 16.700 15.300 18 14 19.300l1.300 1.300L16.600 19.300l1.300 1.300 1.300-1.300L17.900 18l1.300-1.300L17.900 15.400l-1.300 1.300z"/></svg><span>Sair e desvincular sua conta deste aparelho</span></div>
+  </aside>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+/* ===================== EDITE AQUI ===================== */
+const PERFIL = {
+  nome:       "MICHEL SAMANIEGO MARTINS",
+  nascimento: "16/06/2008",
+  naturalidade:"RIO GRANDE/RS",
+  mae:        "MICHELLE UMINSKI SAMANIEGO",
+  cpf:        "056.880.490-22",
+  telefone:   "(53)99181-1448",
+  email:      "seuemail@exemplo.com",
+  endereco:   "Rua Exemplo, Cidade-UF",
+  // FOTO: deixe "" para mostrar o ícone padrão, ou coloque o caminho/URL da imagem.
+  // Exemplos: "foto.jpg"  |  "https://site.com/foto.png"
+  foto:       ""
+};
+/* ====================================================== */
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const silhueta = '<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#fff"/><path d="M50 18c-9 0-15 7-15 17 0 7 3 12 7 16-6 2-14 5-18 9v22h52V60c-4-4-12-7-18-9 4-4 7-9 7-16 0-10-6-17-15-17z" fill="#555050"/></svg>';
+
+function aplicarFoto(el){
+  if(PERFIL.foto){ el.style.backgroundImage = `url("${PERFIL.foto}")`; el.innerHTML = ""; }
+  else el.innerHTML = silhueta;
+}
+aplicarFoto($("#foto")); aplicarFoto($("#hAvatar"));
+
+$("#primeiroNome").textContent = PERFIL.nome.split(" ")[0];
+$("#d-nome").textContent = PERFIL.nome;
+$("#d-nasc").textContent = PERFIL.nascimento;
+$("#d-nat").textContent = PERFIL.naturalidade;
+$("#d-mae").textContent = PERFIL.mae;
+$("#d-cpf").textContent = PERFIL.cpf;
+$("#d-tel").textContent = PERFIL.telefone;
+$("#d-mail").textContent = PERFIL.email;
+$("#d-end").textContent = PERFIL.endereco;
+
+function go(tab){
+  $$(".screen").forEach(s => s.classList.toggle("on", s.id === "s-" + tab));
+  $$("nav [data-tab]").forEach(b => b.classList.toggle("on", b.dataset.tab === tab));
+  $("#fab").classList.toggle("on", tab === "dados");
+  $("#main").scrollTop = 0;
+}
+$$("[data-tab]").forEach(b => b.onclick = () => go(b.dataset.tab));
+$$("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+
+let tt;
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 1800); }
+$$("[data-toast]").forEach(b => b.addEventListener("click", () => { toast(b.dataset.toast); closeMenu(); }));
+$("#bellW").onclick = () => toast("1 notificação (demonstração)");
+
+function openMenu(){ $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); }
+function closeMenu(){ $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); }
+$("#btnMenu").onclick = openMenu; $("#scrim").onclick = closeMenu;
+$("#bio").onclick = () => $("#sw").classList.toggle("on");
+
+/* QR decorativo */
+(function(){
+  const c = $("#qrc").getContext("2d"), n = 25, s = 220 / n; let seed = 7;
+  const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const finder = (x, y) => { c.fillStyle = "#000"; c.fillRect(x*s, y*s, 7*s, 7*s); c.fillStyle = "#fff"; c.fillRect((x+1)*s, (y+1)*s, 5*s, 5*s); c.fillStyle = "#000"; c.fillRect((x+2)*s, (y+2)*s, 3*s, 3*s); };
+  c.fillStyle = "#fff"; c.fillRect(0, 0, 220, 220); c.fillStyle = "#000";
+  for(let i = 0; i < n; i++) for(let j = 0; j < n; j++) if(r() > .5) c.fillRect(i*s, j*s, s, s);
+  [[0,0],[n-7,0],[0,n-7]].forEach(p => { c.fillStyle = "#fff"; c.fillRect((p[0]-1)*s, (p[1]-1)*s, 9*s, 9*s); finder(p[0], p[1]); });
+})();
+</script>
+</body>
+</html>
