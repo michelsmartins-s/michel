@@ -3,14 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>gov.br - Projeto escolar</title>
+<title>gov.br</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="gov.br">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" id="touchIcon" href="">
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--azul:#1351b4;--azul-esc:#0c326f;--verde:#168821;--cinza:#636363;--borda:#e0e0e0;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overscroll-behavior:none}
 body{font-family:"Raleway","Rawline",Arial,sans-serif;background:#dfe3ea;display:flex;justify-content:center;color:#222}
 .app{position:relative;width:100%;max-width:430px;height:100vh;height:100dvh;background:#f8f8f8;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 30px rgba(0,0,0,.2)}
-header{background:#fff;height:68px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+header{background:#fff;height:calc(68px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)!important;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
 .logo{font-size:34px;font-weight:700;letter-spacing:-2px;line-height:1}
 .logo span:nth-child(1){color:#1351b4}.logo span:nth-child(2){color:#f2b705}.logo span:nth-child(3){color:#168821}.logo span:nth-child(4){color:#1351b4}
 .hright{display:flex;align-items:center;gap:20px}
@@ -51,7 +58,7 @@ main{flex:1;overflow-y:auto;position:relative}
 .dado small{display:block;color:var(--azul);font-size:14px;margin-bottom:2px}
 .dado div{font-size:18px;word-break:break-word}
 .btn{display:block;width:calc(100% - 56px);margin:6px 28px 90px;background:var(--azul);color:#fff;border:none;border-radius:30px;height:48px;font:500 17px "Raleway",sans-serif;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.25)}
-.fab{position:absolute;right:16px;bottom:96px;width:70px;height:70px;border-radius:12px;background:#228540;border:none;box-shadow:0 3px 8px rgba(0,0,0,.3);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:3}
+.fab{position:absolute;right:16px;bottom:calc(96px + env(safe-area-inset-bottom,0px));width:70px;height:70px;border-radius:12px;background:#228540;border:none;box-shadow:0 3px 8px rgba(0,0,0,.3);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:3}
 .fab.on{display:flex}
 .fab svg{width:28px;height:28px;fill:#fff}
 /* carteira */
@@ -62,7 +69,7 @@ main{flex:1;overflow-y:auto;position:relative}
 .qr{background:#fff;text-align:center;padding:40px 24px}
 .qr canvas{border:1px solid var(--borda);padding:10px;margin:20px 0}
 /* nav */
-nav{flex:none;height:76px;background:#fff;display:flex;align-items:flex-start;justify-content:space-around;padding-top:10px;border-top:1px solid #eee;position:relative;z-index:4}
+nav{flex:none;height:calc(76px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:#fff;display:flex;align-items:flex-start;justify-content:space-around;padding-top:10px;border-top:1px solid #eee;position:relative;z-index:4}
 nav button{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;font:400 15px "Raleway",sans-serif;color:#888;cursor:pointer;width:20%}
 nav button svg{width:30px;height:30px;fill:#888}
 nav button.on{color:var(--azul)}nav button.on svg{fill:var(--azul)}
@@ -73,7 +80,7 @@ nav .qrb{font-size:15px;gap:2px}
 /* menu */
 .scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.25s;z-index:10}
 .scrim.on{opacity:1;pointer-events:auto}
-.drawer{position:absolute;top:0;bottom:0;left:0;width:78%;background:#fff;border-radius:0 24px 24px 0;transform:translateX(-102%);transition:.28s;z-index:11;padding-top:30px}
+.drawer{position:absolute;top:0;bottom:0;left:0;width:78%;background:#fff;border-radius:0 24px 24px 0;transform:translateX(-102%);transition:.28s;z-index:11;padding-top:calc(30px + env(safe-area-inset-top,0px))}
 .drawer.on{transform:none}
 .drawer h4{font-size:30px;font-weight:600;padding:20px 26px 6px;color:#333}
 .drawer .v{padding:8px 26px 22px;color:#555;font-size:18px;border-bottom:1px solid #aaa}
@@ -83,8 +90,9 @@ nav .qrb{font-size:15px;gap:2px}
 .sw{margin-left:auto;width:56px;height:34px;border-radius:17px;background:#aaa;position:relative;transition:.2s;flex:none}
 .sw::after{content:"";position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;background:#fff;transition:.2s}
 .sw.on{background:var(--azul)}.sw.on::after{left:26px}
-.toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:20;white-space:nowrap}
+.toast{position:absolute;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:20;white-space:nowrap}
 .toast.on{opacity:1}
+@media (max-width:480px){.app{box-shadow:none;max-width:none}}
 </style>
 </head>
 <body>
@@ -230,6 +238,17 @@ function openMenu(){ $("#drawer").classList.add("on"); $("#scrim").classList.add
 function closeMenu(){ $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); }
 $("#btnMenu").onclick = openMenu; $("#scrim").onclick = closeMenu;
 $("#bio").onclick = () => $("#sw").classList.toggle("on");
+
+/* Ícone do app (tela inicial) */
+(function(){
+  const c=document.createElement("canvas");c.width=c.height=180;const x=c.getContext("2d");
+  x.fillStyle="#fff";x.fillRect(0,0,180,180);
+  x.font="bold 64px Arial";x.textBaseline="middle";x.textAlign="center";
+  const t=["g","o","v",".br"],cor=["#1351b4","#f2b705","#168821","#1351b4"];
+  let w=t.map(l=>x.measureText(l).width),tot=w.reduce((a,b)=>a+b,0)-6,px=90-tot/2;
+  t.forEach((l,i)=>{x.fillStyle=cor[i];x.textAlign="left";x.fillText(l,px,92);px+=w[i]-2;});
+  $("#touchIcon").href=c.toDataURL("image/png");
+})();
 
 /* QR decorativo */
 (function(){
